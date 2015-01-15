@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+        <script src="universe.js"></script>
+        <script src="magic.js"></script>
+        
+        <style>
+            body
+            {
+                background-color: #000000;
+                color: #FFFFFF;
+                font-family: sans-serif;
+                font-size: 10pt;
+            }
+            
+            input[type=number]
+            {
+                width: 50px;
+            }
+            
+            td
+            {
+                vertical-align: top;
+            }
+        </style>
+        
+        <title>Javascript Planetarium</title>
+    </head>
+    
+    <body>
+        <div style="display: none;">
+            <img id="moon_1" src="moon1.png" />
+            <img id="moon_2" src="moon2.png" />
+            <img id="moon_3" src="moon3.png" />
+            <img id="moon_4" src="moon4.png" />
+            <img id="moon_5" src="moon5.png" />
+            <img id="moon_6" src="moon6.png" />
+            <img id="moon_7" src="moon7.png" />
+            <img id="moon_8" src="moon8.png" />
+        </div>
+        
+        <table>
+            <tr>
+                <td>
+                   <fieldset>
+                        <legend id="place">Location</legend>
+                        
+                        <table>
+                            <tr>
+                                <td colspan="4" id="longitude">Longitude</td>
+                            </tr>
+                            
+                            <tr>
+                                <td>
+                                    <select id="longitude_sign">
+                                        <option id="west" value="1">W</option>
+                                        <option id="east" selected="selected" value="-1">E</option>
+                                    </select>
+                                </td>
+                                
+                                <td><input id="longitude_degrees" max="180" min="0" type="number" value="0" />°</td>
+                                <td><input id="longitude_minutes" max="59" min="0" type="number" value="0" />'</td>
+                                <td><input id="longitude_seconds" max="59" min="0" type="number" value="0" />"</td>
+                            </tr>
+                            
+                            <tr>
+                                <td colspan="4" id="latitude">Latitude</td>
+                            </tr>
+                            
+                            <tr>
+                                <td>
+                                    <select id="latitude_sign">
+                                        <option value="1">N</option>
+                                        <option value="-1">S</option>
+                                    </select>
+                                </td>
+                                
+                                <td><input id="latitude_degrees" max="90" min="0" type="number" value="0" />°</td>
+                                <td><input id="latitude_minutes" max="59" min="0" type="number" value="0" />'</td>
+                                <td><input id="latitude_seconds" max="59" min="0" type="number" value="0" />"</td>
+                            </tr>
+                        </table>
+                    </fieldset>
+                    
+                    <fieldset>
+                        <legend id="time">Time</legend>
+                        
+                        <table>
+                            <tr>
+                                <td id="date">Date</td>
+                            </tr>
+                            
+                            <tr>
+                                <td>
+                                    <input id="year" max="8000" min="-4000" type="number" value="2000" />
+                                    
+                                    <select id="month">
+                                        <option id="january" value="1">January</option>
+                                        <option id="february" value="2">February</option>
+                                        <option id="march" value="3">March</option>
+                                        <option id="april" value="4">April</option>
+                                        <option id="may" value="5">May</option>
+                                        <option id="june" value="6">June</option>
+                                        <option id="july" value="7">July</option>
+                                        <option id="august" value="8">August</option>
+                                        <option id="september" value="9">September</option>
+                                        <option id="october" value="10">October</option>
+                                        <option id="november" value="11">November</option>
+                                        <option id="december" value="12">December</option>
+                                    </select>
+                                    
+                                    <input id="day" max="31" min="1" type="number" value="1" />
+                                </td>
+                            </tr>
+                            
+                            <tr>
+                                <td id="time_of_day">Time of day</td>
+                            </tr>
+                            
+                            <tr>
+                                <td>
+                                    <input id="hours" max="23" min="0" type="number" value="0" />:<input id="minutes" max="59" min="0" type="number" value="0" />:<input id="seconds" max="59" min="0" type="number" value="0" />
+                                    
+                                    <select id="time_zone">
+                                        <option value="12">UTC+12</option>
+                                        <option value="11">UTC+11</option>
+                                        <option value="10">UTC+10</option>
+                                        <option value="9">UTC+09</option>
+                                        <option value="8">UTC+08</option>
+                                        <option value="7">UTC+07</option>
+                                        <option value="6">UTC+06</option>
+                                        <option value="5">UTC+05</option>
+                                        <option value="4">UTC+04</option>
+                                        <option value="3">UTC+03</option>
+                                        <option value="2">UTC+02</option>
+                                        <option value="1">UTC+01</option>
+                                        <option selected="selected" value="0">UTC</option>
+                                        <option value="-1">UTC-01</option>
+                                        <option value="-2">UTC-02</option>
+                                        <option value="-3">UTC-03</option>
+                                        <option value="-4">UTC-04</option>
+                                        <option value="-5">UTC-05</option>
+                                        <option value="-6">UTC-06</option>
+                                        <option value="-7">UTC-07</option>
+                                        <option value="-8">UTC-08</option>
+                                        <option value="-9">UTC-09</option>
+                                        <option value="-10">UTC-10</option>
+                                        <option value="-11">UTC-11</option>
+                                        <option value="-12">UTC-12</option>
+                                   </select>
+                                </td>
+                            </tr>
+                        </table>
+                    </fieldset>
+                    
+                    <input id="draw" onclick="invokeMagic();" type="button" value="Draw star chart" />
+                </td>
+                
+                <td>
+                    <canvas id="canvas" height="800" width="800"></canvas>
+                </td>
+            </tr>
+        </table>
+    </body>
+</html>
