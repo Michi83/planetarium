@@ -172,7 +172,7 @@ function Sun()
         return earth.heliocentricRadius(julianDay);
     };
     
-    this.name = 'Sonne';
+    this.name = 'Sun';
 }
 
 Sun.prototype = new CelestialBody();
@@ -275,7 +275,7 @@ function Moon()
     this.lastLatitude = null;
     this.lastLongitude = null;
     this.lastRadius = null;
-    this.name = 'Mond';
+    this.name = 'Moon';
     
     this.phase = function(julianDay)
     {
@@ -475,14 +475,14 @@ function neptunianMagnitude(julianDay)
  * Creating the solar system ;)
  */
 var sun = new Sun();
-var mercury = new Planet('Merkur', mercurianMagnitude);
+var mercury = new Planet('Mercury', mercurianMagnitude);
 var venus = new Planet('Venus', cythereanMagnitude);
-var earth = new Planet('Erde', null);
+var earth = new Planet('Earth', null);
 var mars = new Planet('Mars', martianMagnitude);
 var jupiter = new Planet('Jupiter', jovianMagnitude);
 var saturn = new Planet('Saturn', saturnianMagnitude);
 var uranus = new Planet('Uranus', uranianMagnitude);
-var neptune = new Planet('Neptun', neptunianMagnitude);
+var neptune = new Planet('Neptune', neptunianMagnitude);
 var moon = new Moon();
 
 /*
