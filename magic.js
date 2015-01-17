@@ -1,7 +1,7 @@
 var north = 'N';
 var south = 'S';
 var west = 'W';
-var east = 'O';
+var east = 'E';
 
 function invokeMagic()
 {
